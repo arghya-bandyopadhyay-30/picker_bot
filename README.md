@@ -1,4 +1,4 @@
-# 🌀 Team Turn
+# 🌀 Team Turn ![Made with Google Apps Script](https://img.shields.io/badge/Made%20with-Google%20Apps%20Script-blue?logo=google)
 
 ### A simple Google Apps Script that **automates team rotation** by picking a random team member and sending a daily update to a Google Chat space.
 
@@ -6,6 +6,10 @@ To make the experience more enjoyable, the message also includes:
 
 * 💡 A **"Joke of the Day"** (safe for work, programming-themed)
 * 🎯 A shortcut to [Refactoring.Guru](https://refactoring.guru) to explore clean code principles
+
+---
+
+![Team Turn in action](https://raw.githubusercontent.com/your-username/team_turn/main/assets/demo-screenshot.png)
 
 ---
 
@@ -80,11 +84,33 @@ pickName(); // executes the full message flow
 
 ---
 
+## 🔄 How to Reset the Cycle
+
+If you'd like to **manually reset** the cycle (e.g., after a break or a team change), run the following function from the Apps Script editor:
+
+```js
+resetCycle();
+```
+
+This will:
+
+* Clear all previously picked names
+* Reset the cycle count back to `1`
+
+You can also:
+
+* Set up a **manual menu item** in the Apps Script UI
+* Or create a **trigger to auto-reset** every month/quarter if desired
+
+> 🔔 Tip: You can run this from the `Run` menu in the script editor or call it from another function as needed.
+
+---
+
 ## 📝 Customization Notes
 
 * The **card title** is set as: `Code Refactoring - Cycle {n}`
 * The **subtitle**: `Next day's pick: {Name}`
-* The **button** text: `"FEELING GEEKY 🤓"` links to [refactoring.guru](https://refactoring.guru)
+* The **button** text: `"Refactor Like a Pro"` links to [refactoring.guru](https://refactoring.guru)
 
 > You can change the text, image, and links in `buildChatCard()` to match your team’s culture or purpose.
 
@@ -96,3 +122,22 @@ pickName(); // executes the full message flow
 * Google Chat Webhooks
 * Joke API ([JokeAPI.dev](https://jokeapi.dev))
 * Refactoring.Guru (for educational link)
+
+---
+
+## 🤝 Contributing
+
+Contributions, ideas, and improvements are welcome!
+
+If you'd like to:
+
+* Add features (like holiday skipping, analytics, Slack support, etc.)
+* Improve the UI card design
+* Add alternate joke sources
+* Make the script more configurable
+
+Feel free to fork the repo, open an issue, or submit a PR 🙌
+
+> *Maintained with ❤️ by [Arghya Banerjee](https://github.com/arghya-bandyopadhyay-30)*
+
+---
