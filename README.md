@@ -9,7 +9,7 @@ To make the experience more enjoyable, the message also includes:
 
 ---
 
-![Team Turn in action](https://raw.githubusercontent.com/your-username/team_turn/main/assets/demo-screenshot.png)
+![Team Turn in action](https://raw.githubusercontent.com/your-username/team_turn/demo-screenshot.png)
 
 ---
 
