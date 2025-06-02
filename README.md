@@ -1,4 +1,4 @@
-# 🌀 Team Turn ![Made with Google Apps Script](https://img.shields.io/badge/Made%20with-Google%20Apps%20Script-blue?logo=google)
+# 🌀 PickerBot ![Made with Google Apps Script](https://img.shields.io/badge/Made%20with-Google%20Apps%20Script-blue?logo=google)
 
 ### A simple Google Apps Script that **automates team rotation** by picking a random team member and sending a daily update to a Google Chat space.
 
@@ -9,7 +9,7 @@ To make the experience more enjoyable, the message also includes:
 
 ---
 
-![Team Turn in action](https://github.com/arghya-bandyopadhyay-30/team_turn/blob/main/demo-screenshot.png)
+![PickerBot in action](https://github.com/arghya-bandyopadhyay-30/team_turn/blob/main/demo-screenshot.png)
 
 ---
 
