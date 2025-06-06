@@ -155,3 +155,12 @@ function logCycleInfo(pick, cycle, joke) {
   console.log(`Cycle ${cycle} - Picked: ${pick}`);
   console.log(`Joke sent: ${joke}`);
 }
+
+/**
+ * Create a Debug Function (Non-destructive).
+ */
+function debugPrintScriptProperties() {
+  const props = PropertiesService.getScriptProperties();
+  console.log("Selected:", props.getProperty("selected"));
+  console.log("Cycle:", props.getProperty("cycle"));
+}
