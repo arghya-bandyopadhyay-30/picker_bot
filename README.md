@@ -106,6 +106,37 @@ You can also:
 
 ---
 
+## 🚫 Skip a Specific Date (Optional)
+
+Sometimes you may want to **skip execution on specific days**, such as holidays or planned downtimes.
+
+This script supports skipping a day and **notifies the team in Google Chat** with a custom message card explaining why the pick was skipped.
+
+### ✅ How It Works
+
+* Inside the script, there's a function `shouldSkipToday()` that checks if today matches a **predefined date to skip**
+* If it's a skip day, the bot will **not pick a name**
+* Instead, it will **send a Chat message** like:
+
+> “📌 We are currently lagging with the previous cycle. To maintain fairness and consistency, today’s pick is skipped!”
+
+### 🧩 Example
+
+```js
+function shouldSkipToday() {
+  const today = new Date();
+  const skipDate = new Date('2025-06-11'); // Customize this date
+
+  return (
+    today.getFullYear() === skipDate.getFullYear() &&
+    today.getMonth() === skipDate.getMonth() &&
+    today.getDate() === skipDate.getDate()
+  );
+}
+```
+
+---
+
 ## 📝 Customization Notes
 
 * The **card title** is set as: `Code Refactoring - Cycle {n}`
