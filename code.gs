@@ -27,6 +27,13 @@ function pickName() {
     throw new Error("Please configure WEBHOOK_URL and NAMES array before running.");
   }
 
+  if (shouldSkipToday()) {
+    Logger.log("Skipping today’s run due to skip rule.");
+    const skipMessageCard = buildSkipMessageCard();
+    postToChat(skipMessageCard);
+    return;
+  }
+
   const cycleInfo = getCycleInfo();
   const pick = selectRandomName(cycleInfo.selected);
   cycleInfo.selected.push(pick);
@@ -37,19 +44,27 @@ function pickName() {
   const messageCard = buildChatCard(pick, cycleInfo.cycle, joke);
 
   postToChat(messageCard);
-  logCycleInfo(pick, cycleInfo.cycle, joke);
 }
 
 /**
- * Resets the current cycle and clears picked names.
+ * Checks whether today should be skipped from execution.
+ * Currently skips the script on a specific hardcoded date (e.g., 2025-06-11).
+ * Useful for pausing the script on holidays or exceptional cases.
  */
-function resetCycle() {
-  const props = PropertiesService.getScriptProperties();
-  props.setProperty("selected", JSON.stringify([]));
-  props.setProperty("cycle", "1");
+function shouldSkipToday() {
+  const today = new Date();
+  const skipDate = new Date('2025-06-10');
 
-  console.log("Cycle reset to 1 and all selections cleared.");
+  if (
+    today.getFullYear() === skipDate.getFullYear() &&
+    today.getMonth() === skipDate.getMonth() &&
+    today.getDate() === skipDate.getDate()
+  ) {
+    return true;
+  }
+  return false;
 }
+
 
 /**
  * Fetches the current cycle number and selected names.
@@ -138,6 +153,40 @@ function buildChatCard(pick, cycle, joke) {
 }
 
 /**
+ * Builds a Chat card for skipped day message.
+ */
+function buildSkipMessageCard() {
+  return {
+    cards: [
+      {
+        header: {
+          title: "🚫 Team Turn Skipped Today",
+          subtitle: "We’re catching up on the previous cycle",
+          imageUrl: IMAGE_URL,
+          imageStyle: "AVATAR"
+        },
+        sections: [
+          {
+            widgets: [
+              {
+                textParagraph: {
+                  text: `📌 <b>Status Update:</b><br>We are currently lagging with the previous cycle. To maintain fairness and consistency, today’s pick is skipped!`
+                }
+              },
+              {
+                textParagraph: {
+                  text: `<i><font size="1" color="#888888">Created by Arghya Banerjee</font></i>`
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+}
+
+/**
  * Sends the card message to Google Chat.
  */
 function postToChat(messageCard) {
@@ -151,9 +200,20 @@ function postToChat(messageCard) {
 /**
  * Logs current pick details for debugging or auditing.
  */
-function logCycleInfo(pick, cycle, joke) {
+function logCycleInfo() {
   console.log(`Cycle ${cycle} - Picked: ${pick}`);
   console.log(`Joke sent: ${joke}`);
+}
+
+/**
+ * Resets the current cycle and clears picked names.
+ */
+function resetCycle() {
+  const props = PropertiesService.getScriptProperties();
+  props.setProperty("selected", JSON.stringify([]));
+  props.setProperty("cycle", "1");
+
+  console.log("Cycle reset to 1 and all selections cleared.");
 }
 
 /**
