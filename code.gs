@@ -60,7 +60,6 @@ function shouldSkipToday() {
   return skipDates.includes(todayStr);
 }
 
-
 /**
  * Fetches the current cycle number and selected names.
  */
