@@ -48,21 +48,16 @@ function pickName() {
 
 /**
  * Checks whether today should be skipped from execution.
- * Currently skips the script on a specific hardcoded date (e.g., 2025-06-11).
- * Useful for pausing the script on holidays or exceptional cases.
+ * Allows skipping on multiple specific dates.
  */
 function shouldSkipToday() {
-  const today = new Date();
-  const skipDate = new Date('2025-06-10');
+  const todayStr = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  const skipDates = [
+    '2025-06-11',
+    '2025-06-13',
+  ];
 
-  if (
-    today.getFullYear() === skipDate.getFullYear() &&
-    today.getMonth() === skipDate.getMonth() &&
-    today.getDate() === skipDate.getDate()
-  ) {
-    return true;
-  }
-  return false;
+  return skipDates.includes(todayStr);
 }
 
 
