@@ -106,34 +106,41 @@ You can also:
 
 ---
 
-## 🚫 Skip a Specific Date (Optional)
+## 🚫 Skip Specific Dates (Optional)
 
-Sometimes you may want to **skip execution on specific days**, such as holidays or planned downtimes.
+Sometimes you may want to **skip execution on certain days**, such as holidays, planned downtimes, or exceptional situations.
 
-This script supports skipping a day and **notifies the team in Google Chat** with a custom message card explaining why the pick was skipped.
+This script supports skipping **multiple dates** and will notify the team in Google Chat with a custom message card explaining why the pick was skipped.
 
 ### ✅ How It Works
 
-* Inside the script, there's a function `shouldSkipToday()` that checks if today matches a **predefined date to skip**
-* If it's a skip day, the bot will **not pick a name**
+* Inside the script, there's a function `shouldSkipToday()` that checks if today matches any of the **predefined dates to skip**.
+* If today is a skip day, the bot will **not pick a name**.
 * Instead, it will **send a Chat message** like:
 
 > “📌 We are currently lagging with the previous cycle. To maintain fairness and consistency, today’s pick is skipped!”
 
 ### 🧩 Example
 
-```js
+```javascript
+/**
+ * Checks whether today should be skipped from execution.
+ * Allows skipping on multiple specific dates.
+ */
 function shouldSkipToday() {
-  const today = new Date();
-  const skipDate = new Date('2025-06-11'); // Customize this date
+  const todayStr = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  const skipDates = [
+    '2025-06-11',
+    '2025-06-13'
+    // Add more dates as needed
+  ];
 
-  return (
-    today.getFullYear() === skipDate.getFullYear() &&
-    today.getMonth() === skipDate.getMonth() &&
-    today.getDate() === skipDate.getDate()
-  );
+  return skipDates.includes(todayStr);
 }
 ```
+
+* You can easily maintain the list of skip dates by adding or removing entries from the `skipDates` array.
+* The date format used is: `yyyy-MM-dd` (ISO format).
 
 ---
 
